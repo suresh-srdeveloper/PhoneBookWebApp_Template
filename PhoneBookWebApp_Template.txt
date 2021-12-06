@@ -1,0 +1,72 @@
+PhoneBookWebApp
+~~~~~~~~~~~~~~~
+
+->To develop this web app basically we need 8 components, please find below template snippets.
+
+-------------------------------------com.sureshit
+public class PhoneBookWebAppApplication {--}
+public class ServletInitializer extends SpringBootServletInitializer {--}
+-------------------------------------com.sureshit.dao 
+public class ContactDao { 
+	private Long srno;
+	private String name; 
+	private String email; 
+	private String phno;
+        //set & get 	
+}
+-------------------------------------com.sureshit.dto
+public class ContactDto { 
+	private Long srno;
+	private String name;
+	private String email;
+	private String phno;
+        //set & get
+}
+-------------------------------------com.sureshit.repo
+public interface ContactRepository extends JpaRepository<ContactDao, Long> {
+
+}
+-------------------------------------com.sureshit.service
+public interface ContactService {
+	public String saveContact(ContactDto contactDto);
+	public List getAllContacts();
+	public String updateContactDetails(ContactDto contactDto);
+	public String deleteContactById(Long id);
+	public ContactDto getContactById(Long id);	
+}
+-------------------------------------com.sureshit.serviceimpl 
+public class ContactServiceImpl implements ContactService {
+ 
+	private ContactRepository contactRepository;
+	ModelMapper modelMapper = new ModelMapper();
+
+	public String saveContact(ContactDto contactDto) {--}
+
+	public List getAllContacts() {--}
+
+	public String updateContactDetails(ContactDto contactDto) {--}
+
+	public String deleteContactById(Long id){--}
+
+	public ContactDto getContactById(Long id) {--}
+}
+-------------------------------------com.sureshit.rest
+public class ContactRestController { 
+	private ContactService contactService;
+	ResponseEntity<Object> response = null;
+
+	@PostMapping("/create_contact")
+	public ResponseEntity<Object> createContact(@RequestBody ContactDto contactDto) {--}
+
+	@GetMapping("getall_contacts")
+	public ResponseEntity<Object> getAllContacts() {--}
+	
+	@PatchMapping("/update_contact")
+	public ResponseEntity<Object> updateContact(@RequestBody ContactDto contactDto) {--}
+	
+	@DeleteMapping("/delete_contact/{id}")
+	public ResponseEntity<Object> deleteContactById(@PathVariable String id) {--}
+	
+	@GetMapping("getcontact/{id}")
+	public ResponseEntity<Object> getContactById(@PathVariable String id) {--}
+}
